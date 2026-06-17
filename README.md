@@ -8,7 +8,7 @@ An easy-to-use, dynamic R Markdown tool designed to generate clean, printable ma
 
 * **Dynamic Operations:** Choose from **Addition**, **Subtraction**, **Multiplication**, **Division**, or a shuffled **Mixture** of problem sets.
 * **Highly Parameterized:** Adjust digit thresholds, problem counts, and operation types effortlessly.
-* **Kid-Friendly Layouts:** Smart rendering automatically stacks multi-digit arithmetic vertically, while formatting division cleanly as horizontal equations ($20 \div 5 = \_\_\_$).
+* **Kid-Friendly Layouts:** Smart rendering automatically stacks multi-digit arithmetic vertically, while formatting division cleanly as horizontal equations ($20 \div 5 = \text{\_\_\_}$).
 * **Print Ready:** Includes an elegant right-aligned Name/Date header block and splits the presentation into a dual-column layout maximizing paper workspace.
 * **No Negative Answers:** Built-in validation limits subtraction configurations so young learners don't run into negative results.
 * **Perfect Integer Division:** Generates quotients without decimal remainders, keeping division approachable.
