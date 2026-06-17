@@ -1,0 +1,93 @@
+---
+lang: en-GB
+output: 
+  pdf_document:
+    latex_engine: xelatex
+    includes:
+      in_header: Math.Rnw
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, comment = NA)
+library(dplyr)
+
+# ---- CONFIGURATION ----
+num_problems <- 20    # Total problems to generate
+max_digit <- 99       # Max number for operations
+min_digit <- 10       # Min number for operations
+type_problems <- "multiply" # Options: "add", "subtract", "multiply", "divide", "mix"
+# -----------------------
+
+# Function to generate math structures
+generate_problems <- function(type, n) {
+  set.seed(sample(1:10000, 1)) 
+  
+  if(type == "addition") {
+    num1 <- sample(min_digit:max_digit, n, replace = TRUE)
+    num2 <- sample(min_digit:max_digit, n, replace = TRUE)
+    op <- "+"
+    ans <- num1 + num2
+  } else if(type == "subtraction") {
+    num1 <- sample(min_digit:max_digit, n, replace = TRUE)
+    num2 <- sample(min_digit:max_digit, n, replace = TRUE)
+    actual_num1 <- pmax(num1, num2)
+    actual_num2 <- pmin(num1, num2)
+    num1 <- actual_num1
+    num2 <- actual_num2
+    op <- "-"
+    ans <- num1 - num2
+  } else if(type == "multiplication") {
+    num1 <- sample(2:12, n, replace = TRUE) 
+    num2 <- sample(2:12, n, replace = TRUE)
+    op <- "\\times"
+    ans <- num1 * num2
+  } else if(type == "division") {
+    num2 <- sample(2:10, n, replace = TRUE) 
+    ans <- sample(2:10, n, replace = TRUE)  
+    num1 <- num2 * ans                      
+    op <- "\\div"
+  }
+  
+  return(data.frame(num1, num2, op, ans, type = type))
+}
+```
+
+\begin{flushright}
+\textbf{Name:} \underline{\hspace{5cm}} \\[0.3cm]
+\textbf{Date:} \underline{\hspace{5cm}}
+\end{flushright}
+
+\vspace{0.5cm}
+
+\begin{multicols}{3}
+```{r, results='asis'}
+# 1. Determine and generate the problem pool based on your parameter
+if (type_problems == "add") {
+  all_problems <- generate_problems("addition", num_problems)
+} else if (type_problems == "subtract") {
+  all_problems <- generate_problems("subtraction", num_problems)
+} else if (type_problems == "multiply") {
+  all_problems <- generate_problems("multiplication", num_problems)
+} else if (type_problems == "divide") {
+  all_problems <- generate_problems("division", num_problems)
+} else if (type_problems == "mix") {
+  # Mixes addition and subtraction evenly (adjust as needed)
+  add_probs <- generate_problems("addition", ceiling(num_problems / 2))
+  sub_probs <- generate_problems("subtraction", floor(num_problems / 2))
+  all_problems <- rbind(add_probs, sub_probs) %>% sample_frac(1) 
+}
+
+# 2. Print loop with layout detection
+for(i in 1:nrow(all_problems)) {
+  
+  # For division, horizontal layout look better (e.g., 20 ÷ 5 = ___)
+  if (all_problems$type[i] == "division") {
+    cat(paste0(i, ") \\quad $", all_problems$num1[i], " ", all_problems$op[i], " ", all_problems$num2[i], " = \\quad $ \\vspace{1.5cm}\n\n"))
+  } else {
+    # Vertical stacking for addition, subtraction, and multiplication
+    cat(paste0(i, ") \\quad $", "\\begin{array}{r}", all_problems$num1[i], "\\\\ ", all_problems$op[i], " ", all_problems$num2[i], "\\\\ \\hline \\end{array}$", "\\vspace{1.5cm}\n\n"))
+  }
+  
+}
+```
+\end{multicols}

@@ -1,0 +1,6 @@
+% Essential packages and setups
+\usepackage{multicol}
+\usepackage{pdfcomment} % Required for \pdftooltip
+\RequirePackage{accsupp} % Required for \BeginAccSupp
+
+\newcommand{\AccTool}[2]{\BeginAccSupp{method=pdfstringdef,unicode,Alt={{#1}}}\pdftooltip{{#2}}{{#1}}\EndAccSupp{}}

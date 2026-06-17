@@ -1,0 +1,17 @@
+# R session and historical data
+.Rhistory
+*.RData
+
+# RStudio project configuration
+.Rproj.user/
+
+# Output and build logs
+*.log
+*.pdf
+
+# Operating system files
+.DS_Store
+
+# Temporary / application files
+*.upa
+*.upb
