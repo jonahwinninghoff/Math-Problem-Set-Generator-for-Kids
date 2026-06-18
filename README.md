@@ -4,6 +4,8 @@ An easy-to-use, dynamic R Markdown tool designed to generate clean, printable ma
 
 ---
 
+![](./Assets/Math.png)
+
 ## 🚀 Features
 
 * **Dynamic Operations:** Choose from **Addition**, **Subtraction**, **Multiplication**, **Division**, or a shuffled **Mixture** of problem sets.

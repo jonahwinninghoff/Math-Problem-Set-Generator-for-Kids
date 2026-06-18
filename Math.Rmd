@@ -15,7 +15,7 @@ library(dplyr)
 num_problems <- 20    # Total problems to generate
 max_digit <- 99       # Max number for operations
 min_digit <- 10       # Min number for operations
-type_problems <- "multiply" # Options: "add", "subtract", "multiply", "divide", "mix"
+type_problems <- "divide" # Options: "add", "subtract", "multiply", "divide", "mix"
 # -----------------------
 
 # Function to generate math structures
@@ -56,6 +56,10 @@ generate_problems <- function(type, n) {
 \textbf{Name:} \underline{\hspace{5cm}} \\[0.3cm]
 \textbf{Date:} \underline{\hspace{5cm}}
 \end{flushright}
+
+\begin{center}
+\textbf{Math Problem Set}
+\end{center}
 
 \vspace{0.5cm}
 
